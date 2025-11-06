@@ -2,10 +2,8 @@ const express = require('express')
 const app = express()
 const { getPort } = require('./config.js')
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.use(express.static('public'))
 
-app.listen(getPort(), () => {
-    console.log(`Example app listening on port ${getPort()}`)
-})
+app.use('/api', require('./api.js'))
+
+app.listen(getPort(), () => console.log(`It's on port ${getPort()}`))
